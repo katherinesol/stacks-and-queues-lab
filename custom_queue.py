@@ -5,26 +5,37 @@ class Queue:
         self.items = []
 
     def enqueue(self, item):
-        # TODO: Add an item to the end of the queue
-        pass
+        # add item to the end of the queue
+        self.items.append(item)
 
     def dequeue(self):
-        # TODO: Remove and return the item from the front of the queue
-        pass
+        # remove and return item from the front
+        if not self.is_empty():
+            return self.items.pop(0)
+        return None
 
     def peek(self):
-        # TODO: Return the item at the front of the queue without removing it
-        pass
+        # return front item without removing it
+        if not self.is_empty():
+            return self.items[0]
+        return None
 
     def is_empty(self):
-        # TODO: Return True if the queue is empty
-        pass
+        # return True if queue has no items
+        return len(self.items) == 0
 
     def select_and_announce_winner(self):
-        """
-        Randomly selects a winner from the queue.
-        Dequeues all items up to and including the winner.
-        Returns the name of the winning customer.
-        """
-        # TODO: Implement winner selection and dequeue process
-        pass
+        # randomly select a winner from the queue
+        if self.is_empty():
+            return None
+        
+        # pick a random winner from current items
+        winner = random.choice(self.items)
+        
+        # dequeue everyone up to and including the winner
+        while not self.is_empty():
+            customer = self.dequeue()
+            if customer == winner:
+                break
+        
+        return winner
